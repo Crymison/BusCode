@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/servicos/auth_servicos.dart';
 import 'package:flutter_application_1/telas/motorista_principal_page.dart';
 import 'package:flutter_application_1/telas/usuario_principal_page.dart';
+import 'package:provider/provider.dart';
 
   class LoginPage extends StatefulWidget {
   const LoginPage({ Key? key }) : super(key: key);
@@ -11,9 +13,11 @@ import 'package:flutter_application_1/telas/usuario_principal_page.dart';
 class _LoginPageState extends State<LoginPage>{
 
   final _formKey = GlobalKey<FormState>();
-  final _email = TextEditingController();
-  final _senha = TextEditingController();
+  final email = TextEditingController();
+  final senha = TextEditingController();
   bool _isObscure = true;
+
+  @override
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,7 @@ class _LoginPageState extends State<LoginPage>{
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
-                  controller: _email,
+                  controller: email,
                   style: const TextStyle(fontSize: 20, color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
@@ -81,7 +85,7 @@ class _LoginPageState extends State<LoginPage>{
                 const SizedBox(height: 10),
                 TextFormField(
                   obscureText: _isObscure,
-                  controller: _senha,
+                  controller: senha,
                   style: const TextStyle(fontSize: 20, color: Colors.white),
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -126,15 +130,15 @@ class _LoginPageState extends State<LoginPage>{
                   child: ElevatedButton(
                     onPressed: () {
                       if(_formKey.currentState!.validate()){
-                        //conectar banco com login
-                        _email.clear;
-                        _senha.clear;
-                        Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const UsuarioMainPage())
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Login realizado com sucesso!')),
-                        );
+                        login();
+                        email.clear;
+                        senha.clear;
+                        // Navigator.push(context,
+                        //   MaterialPageRoute(builder: (context) => const UsuarioMainPage())
+                        // );
+                        // ScaffoldMessenger.of(context).showSnackBar(
+                        //   SnackBar(content: Text('Login realizado com sucesso!')),
+                        // );
                       }
                     },
                     child: Row(
@@ -151,33 +155,19 @@ class _LoginPageState extends State<LoginPage>{
                     ), 
                   ),
                 ),
-                const SizedBox(height: 30),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const MotoristaMainPage())
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: const Text('Login temporario motorista',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          ),
-                        ),
-                      ],
-                    ), 
-                  ),
-                ),
               ],
             ),
           ),
         ), 
       )
     );
+  }
+
+  login() async{
+    try{
+      await context.read<AuthService>().login(email.text, senha.text);
+    } on AuthException catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+    }
   }
 }
