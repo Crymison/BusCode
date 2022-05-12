@@ -25,11 +25,9 @@ class _AutchCheckState extends State<AutchCheck> {
       return UsuarioMainPage();
   }
 
-  loading(){
+  loading() {
     return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator()
-      ),
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }

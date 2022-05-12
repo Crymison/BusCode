@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/servicos/auth_servicos.dart';
-import 'package:flutter_application_1/telas/login_page.dart';
 import 'package:flutter_application_1/telas/qrcode_page.dart';
 import 'package:flutter_application_1/telas/noticias_aluno_page.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_application_1/classes/aluno_classe.dart';
-// import 'package:flutter_application_1/repositorios/aluno_repositorio.dart';
-// import 'package:flutter_application_1/repositorios/instituicao_repositiro.dart';
 
 class UsuarioMainPage extends StatefulWidget {
   //receber email aluno final.....

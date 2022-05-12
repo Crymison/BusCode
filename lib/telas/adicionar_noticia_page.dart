@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/classes/noticia_classe.dart';
+import 'package:flutter_application_1/repositorios/noticia_db.dart';
 import 'package:flutter_application_1/repositorios/noticia_repositorio.dart';
 import 'package:flutter_application_1/telas/motorista_principal_page.dart';
-
+import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
 
 class AdicionarNoticiaPage extends StatefulWidget {
   @override
@@ -13,7 +14,10 @@ class _AdicionarNoticiaPageState extends State<AdicionarNoticiaPage> {
   final tabelaNoticias = NoticiaRepository.tabela;
   String titulo = '';
   String noticias = '';
-
+  Noticia_db teste = new Noticia_db();
+  final data = DateTime.now();
+  var mes;
+  var minutos;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,7 +70,7 @@ class _AdicionarNoticiaPageState extends State<AdicionarNoticiaPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (noticias.length >= 5 && titulo.length >= 5) {
-                          Noticia noticia = new Noticia(
+                          /*Noticia noticia = new Noticia(
                             titulo_noticia: titulo,
                             texto_noticia: noticias,
                             data_noticia: '23-10-2002',
@@ -80,17 +84,32 @@ class _AdicionarNoticiaPageState extends State<AdicionarNoticiaPage> {
                             MaterialPageRoute(
                               builder: (context) => MotoristaMainPage()
                             )
-                          );
+                          );*/
+                          if (data.month < 10) {
+                            mes = "0" + data.month.toString();
+                          }
+
+                          teste.adicionarNoticia(
+                              titulo,
+                              noticias,
+                              /*data.day.toString() + "/" + mes,
+                              data.hour.toString() +
+                                  ":" +
+                                  data.minute.toString(),
+                              1)*/
+                              data);
+                          teste.buscarNoticia();
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => const NoticiasMotoristaPage()));
                         }
                       },
-                      child: const Text('Adicionar', style: TextStyle(fontSize: 20, color: Colors.black)),
+                      child: const Text('Adicionar',
+                          style: TextStyle(fontSize: 20, color: Colors.black)),
                     ),
                   ),
                 )
               ],
             ),
-          )
-        ),
+          )),
     );
   }
 }

@@ -24,8 +24,12 @@ class AuthService extends ChangeNotifier{
     });
   }
 
-  _getUser(){
+  _getUser() {
     usuario = _auth.currentUser;
+    //print(usuario!.email);
+    var aux = usuario?.email;
+    print(aux.toString());
+    //retornarUsuario(aux);
     notifyListeners();
   }
 
