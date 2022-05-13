@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/classes/aluno_classe.dart';
 
 class AlunoDetalhePage extends StatefulWidget {
-
   Aluno alunos;
-
   AlunoDetalhePage({ Key? key, required this.alunos}) : super(key: key);
 
   @override
@@ -32,13 +30,13 @@ class _AlunoDetalhePageState extends State<AlunoDetalhePage>{
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ClipRRect(
-                    child: Image.asset('imagens/fotousuario.jpg', width: 150,),
+                    child: Image.asset(widget.alunos.icone, width: 150,),
                     borderRadius: const BorderRadius.all(Radius.circular(150)),
                     ),
                 ]
@@ -49,10 +47,8 @@ class _AlunoDetalhePageState extends State<AlunoDetalhePage>{
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Text(
-                    'Jorel da Silva Pereira Antunes Coelho',  /*tabela[Aluno].nome_aluno.toString()*/
-                    style: TextStyle(fontSize: 20),
+                  padding: const EdgeInsets.only(top: 1),
+                  child: Text(widget.alunos.nome_aluno.toString(), style: TextStyle(fontSize: 30),
                   )
                 ),
               ],
@@ -66,18 +62,18 @@ class _AlunoDetalhePageState extends State<AlunoDetalhePage>{
                   child: Column(
                     children: [
                       Icon(Icons.email),
-                      const Text('Email:', style: TextStyle(fontSize: 18)),
-                      Text('jorel@hotmail.com', style: TextStyle(fontSize: 15))
+                      const Text('Email:', style: TextStyle(fontSize: 25)),
+                      Text(widget.alunos.email_aluno.toString(), style: TextStyle(fontSize: 20))
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 30),
                   child: Column(
                     children: [/*person_pin*/
                       Icon(Icons.assignment_ind),
-                      const Text('RG:', style: TextStyle(fontSize: 18)),
-                      Text('2355572-7', style: TextStyle(fontSize: 15))
+                      const Text('RG:', style: TextStyle(fontSize: 25)),
+                      Text(widget.alunos.rg_aluno.toString(), style: TextStyle(fontSize: 20))
                     ],
                   ),
                 )
@@ -92,8 +88,8 @@ class _AlunoDetalhePageState extends State<AlunoDetalhePage>{
                   child: Column(
                     children: [
                       Icon(Icons.school),
-                      const Text('Instituição:', style: TextStyle(fontSize: 18)),
-                      Text('Universidade Tecnológica Federal do Paraná', style: TextStyle(fontSize: 15))
+                      const Text('Instituição:', style: TextStyle(fontSize: 25)),
+                      Text(widget.alunos.instituicao.toString(), style: TextStyle(fontSize: 18))
                     ],
                   ),
                 )
@@ -104,12 +100,12 @@ class _AlunoDetalhePageState extends State<AlunoDetalhePage>{
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children:[
                       Icon(Icons.phone),
-                      const Text('Telefone para Contato:', style: TextStyle(fontSize: 18)),
-                      Text('(43) 90000-0000', style: TextStyle(fontSize: 15))
+                      const Text('Telefone para Contato:', style: TextStyle(fontSize: 23)),
+                      Text(widget.alunos.telefone_aluno.toString(), style: TextStyle(fontSize: 18))
                     ],
                     
                   ),

@@ -4,10 +4,11 @@ import 'package:flutter_application_1/classes/instituicao_classe.dart';
 import 'package:flutter_application_1/repositorios/instituicao_db.dart';
 import 'package:flutter_application_1/repositorios/instituicao_repositiro.dart';
 import 'package:flutter_application_1/repositorios/noticia_db.dart';
+import 'package:flutter_application_1/repositorios/usuario_db.dart';
 import 'package:flutter_application_1/telas/instituicao_detalhe_page.dart';
 import 'package:flutter_application_1/telas/ler_qrcode_page.dart';
 import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
-import 'globals.dart' as globals;
+import '../classes/globals.dart' as globals;
 
 class MotoristaMainPage extends StatefulWidget {
   var quantidade;
@@ -24,12 +25,18 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
   Widget build(BuildContext context) {
 
     Noticia_db teste = Noticia_db();
+    Usuario_db alu = Usuario_db();
     Instituicao_db faculdadeMetodo = Instituicao_db();
 
     final faculdade = Instituicao_db.faculdades;
     final tabelaInstituicao = InstituicaoRepository.tabela;
     
-    mostrarInstituicao(Instituicao instituicao) {
+    
+    mostrarInstituicao(Instituicao instituicao) async {
+      if(globals.contadorAlunoFaculdade){
+        await alu.pegardadosAlunos(instituicao.nome.toString());
+        globals.contadorAlunoFaculdade = false;
+      }
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -54,14 +61,13 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
             icon: const Icon(Icons.notifications_active),
             onPressed: () async {
               if (globals.contadorMotorista) {
-                print(aux);
                 await teste.buscarNoticia();
                 globals.contadorMotorista = false;
               }
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const NoticiasMotoristaPage()));
+                      builder: (context) => NoticiasMotoristaPage()));
             },
           ),
         ],

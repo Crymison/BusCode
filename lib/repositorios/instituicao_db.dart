@@ -6,19 +6,20 @@ class Instituicao_db {
   final tabelaInstituicao = InstituicaoRepository.tabela;
   static List<Instituicao> faculdades = [];
   var conta = 0;
+
   buscarInstituicao() async {
     var colecao = FirebaseFirestore.instance.collection('Instituicao');
     var todasInstituicao = await colecao.get();
 
     for (var doc in todasInstituicao.docs) {
       Instituicao instituicao = Instituicao(
-          id: doc['id'],
-          nome: doc['nome'],
-          icone: doc['icone'],
-          endereco: doc['endereco'],
-          sigla: doc['sigla'],
-          telefone: doc['telefone']);
-
+        id: doc['id'],
+        nome: doc['nome'],
+        icone: doc['icone'],
+        endereco: doc['endereco'],
+        sigla: doc['sigla'],
+        telefone: doc['telefone']
+      );
       faculdades.add(instituicao);
     }
   }

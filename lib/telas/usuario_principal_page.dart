@@ -4,7 +4,7 @@ import 'package:flutter_application_1/repositorios/noticia_db.dart';
 import 'package:flutter_application_1/telas/login_page.dart';
 import 'package:flutter_application_1/telas/qrcode_page.dart';
 import 'package:flutter_application_1/telas/noticias_aluno_page.dart';
-import 'globals.dart' as globals;
+import '../classes/globals.dart' as globals;
 
 class UsuarioMainPage extends StatefulWidget {
   Aluno aluno;
@@ -90,19 +90,18 @@ class _UsuarioMainPageState extends State<UsuarioMainPage> {
                       children: [
                         Icon(Icons.email),
                         Text('Email:', style: TextStyle(fontSize: 25)),
-                        Text(widget.aluno.email_aluno.toString(),
-                            style: TextStyle(fontSize: 15))
+                        Text(widget.aluno.email_aluno.toString(), style: TextStyle(fontSize: 20))
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.only(top: 30),
                     child: Column(
                       children: [
                         Icon(Icons.assignment_ind),
                         Text('RG:', style: TextStyle(fontSize: 25)),
                         Text(widget.aluno.rg_aluno.toString(),
-                            style: TextStyle(fontSize: 15))
+                            style: TextStyle(fontSize: 20))
                       ],
                     ),
                   )
@@ -117,9 +116,9 @@ class _UsuarioMainPageState extends State<UsuarioMainPage> {
                     child: Column(
                       children: [
                         Icon(Icons.school),
-                        Text('Instituição:', style: TextStyle(fontSize: 23)),
+                        Text('Instituição:', style: TextStyle(fontSize: 25)),
                         Text(widget.aluno.instituicao.toString(),
-                            style: TextStyle(fontSize: 15))
+                            style: TextStyle(fontSize: 18))
                       ],
                     ),
                   )
@@ -137,7 +136,7 @@ class _UsuarioMainPageState extends State<UsuarioMainPage> {
                         Text('Telefone para Contato:',
                             style: TextStyle(fontSize: 23)),
                         Text(widget.aluno.telefone_aluno.toString(),
-                            style: TextStyle(fontSize: 15))
+                            style: TextStyle(fontSize: 18))
                       ],
                     ),
                   )
@@ -145,7 +144,7 @@ class _UsuarioMainPageState extends State<UsuarioMainPage> {
               ),
               Container(
                 alignment: Alignment.bottomCenter,
-                margin: EdgeInsets.only(top: 60, right: 30, left: 30),
+                margin: EdgeInsets.only(top: 40, right: 30, left: 30),
                 child: ElevatedButton(
                   onPressed: () {
                     //ARRUMAR AQUI PARA FAZER QR CODE

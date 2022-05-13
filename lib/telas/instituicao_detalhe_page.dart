@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/classes/aluno_classe.dart';
 import 'package:flutter_application_1/classes/instituicao_classe.dart';
 import 'package:flutter_application_1/repositorios/aluno_repositorio.dart';
+import 'package:flutter_application_1/repositorios/usuario_db.dart';
 import 'package:flutter_application_1/telas/aluno_detalhe_page.dart';
 import 'package:flutter_application_1/telas/ler_qrcode_page.dart';
 import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
 
 class InstituicaoDetalhes extends StatefulWidget {
   Instituicao instituicao;
-
   InstituicaoDetalhes({Key? key, required this.instituicao}) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class InstituicaoDetalhes extends StatefulWidget {
 class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
   @override
   Widget build(BuildContext context) {
-    final tabelaAlunos = AlunoRepository.tabela;
+    final tabelaAluno = Usuario_db.tabela;
     mostrarAlunos(Aluno alunos) {
       Navigator.push(
           context,
@@ -30,7 +30,7 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Alunos'),
+        title: Text(widget.instituicao.sigla.toString()),
         actions: [
           IconButton(
             icon: const Icon(Icons.qr_code_scanner),
@@ -49,7 +49,7 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NoticiasMotoristaPage()
+                  builder: (context) => NoticiasMotoristaPage()
                 )
               );
             },
@@ -57,19 +57,19 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
         ],
       ),
       body: ListView.separated(
-        itemBuilder: (BuildContext context, int alunos) {
+        itemBuilder: (BuildContext context, int aluno) {
           return ListTile(
-            leading: Image.asset(tabelaAlunos[alunos].icone),
-            title: Text(tabelaAlunos[alunos].nome_aluno, style: TextStyle(fontSize: 16, color: Colors.black)),
-            subtitle: Text(tabelaAlunos[alunos].telefone_aluno, style: TextStyle(fontSize: 14, color: Colors.black)),
+            leading: Image.asset(tabelaAluno[aluno].icone),
+            title: Text(tabelaAluno[aluno].nome_aluno, style: TextStyle(fontSize: 16, color: Colors.black)),
+            subtitle: Text(tabelaAluno[aluno].telefone_aluno, style: TextStyle(fontSize: 14, color: Colors.black)),
             selected: false,
             selectedTileColor: Colors.indigo,
-            onTap: () => mostrarAlunos(tabelaAlunos[alunos]), // tela do aluno
+            onTap: () => mostrarAlunos(tabelaAluno[aluno]),
           );
         },
         padding: EdgeInsets.all(16),
         separatorBuilder: (_, ___) => Divider(),
-        itemCount: tabelaAlunos.length,
+        itemCount: tabelaAluno.length,
       ),
     );
   }
