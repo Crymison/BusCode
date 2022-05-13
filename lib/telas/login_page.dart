@@ -143,24 +143,30 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           login();
                           var a = await us.verificaUsuario(email.text);
-                          email.clear;
-                          senha.clear;
-                          if (a) { // ERRO EMAIL
-                            await facul.buscarInstituicao();
-                            ajuda = await facul.quantidadeInstituicao();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MotoristaMainPage(
-                                          quantidade: ajuda,
-                                        )));
-                          } else {
-                            M = await us.pegardadosUsuario(email.text);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UsuarioMainPage(aluno: M)));
-                          }
+                          if (a == null){
+                            email.clear;
+                            senha.clear;
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('E-mail não registrado!, Tente novamente!')));
+                          }else{
+                            email.clear;
+                            senha.clear;
+                            if (a) {
+                              await facul.buscarInstituicao();
+                              ajuda = await facul.quantidadeInstituicao();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MotoristaMainPage(
+                                            quantidade: ajuda,
+                                          )));
+                            } else {
+                              M = await us.pegardadosUsuario(email.text);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UsuarioMainPage(aluno: M)));
+                            }
+                          } 
                         }
                       },
                       child: Row(
