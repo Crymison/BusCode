@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/classes/aluno_classe.dart';
 
-// import 'package:flutter_application_1/classes/aluno_classe.dart';
-// import 'package:flutter_application_1/repositorios/aluno_repositorio.dart';
-// import 'package:flutter_application_1/repositorios/instituicao_repositiro.dart';
-
 class AlunoDetalhePage extends StatefulWidget {
   //receber email aluno final.....
   Aluno alunos;

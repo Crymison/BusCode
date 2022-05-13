@@ -26,16 +26,12 @@ class AuthService extends ChangeNotifier{
 
   _getUser() {
     usuario = _auth.currentUser;
-    //print(usuario!.email);
-    var aux = usuario?.email;
-    print(aux.toString());
-    //retornarUsuario(aux);
     notifyListeners();
   }
 
   login(String email, String senha) async {
     try{
-      await _auth.signInWithEmailAndPassword(email: email, password: senha);
+      await _auth.signInWithEmailAndPassword(email: email, password: senha);      
       _getUser(); 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found'){

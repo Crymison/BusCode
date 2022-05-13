@@ -22,7 +22,8 @@ class _AutchCheckState extends State<AutchCheck> {
     else if (auth.usuario == null)
       return LoginPage();
     else
-      return UsuarioMainPage();
+      return LoginPage();
+      //return UsuarioMainPage(aluno);
   }
 
   loading() {

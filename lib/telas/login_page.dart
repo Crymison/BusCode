@@ -3,9 +3,10 @@ import 'package:flutter_application_1/servicos/auth_servicos.dart';
 import 'package:flutter_application_1/telas/motorista_principal_page.dart';
 import 'package:flutter_application_1/telas/usuario_principal_page.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_application_1/repositorios/usuario_db.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -16,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final senha = TextEditingController();
   bool _isObscure = true;
+  Usuario_db us = Usuario_db();
+  var M;
 
   login() async {
     try {
@@ -132,20 +135,21 @@ class _LoginPageState extends State<LoginPage> {
                     alignment: Alignment.bottomCenter,
                     margin: const EdgeInsets.only(top: 20),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          //login();
+                          login();
+                          var a = await us.verificaUsuario(email.text);
                           email.clear;
                           senha.clear;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const MotoristaMainPage()));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Login realizado com sucesso!')),
-                          );
+                          if (a){
+                            //var U = await us.pegardadosUsuario(email.text);
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const MotoristaMainPage()));
+                          }else{
+                            M = await us.pegardadosUsuario(email.text);
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => UsuarioMainPage(aluno: M)));
+                          }
                         }
                       },
                       child: Row(
