@@ -81,4 +81,10 @@ RELATORIO 2:{
     - Mostrar QRCode (3 Etapa);
     - Utilização de Apis Gerais;
     - Resolver bugs;
+    
+    Instalação:
+    
+    -executar comando flutterfire configure;
+    -executar flutter clean e depois flutter pub get;
+    -executar flutter run ou via VScode;
 }
