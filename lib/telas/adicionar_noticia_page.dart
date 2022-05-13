@@ -25,14 +25,16 @@ class _AdicionarNoticiaPageState extends State<AdicionarNoticiaPage> {
               colors: [Color(0xFF13818D), Color(0xFF070C3B)])),
       child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(context,
-                MaterialPageRoute(builder: (context) => NoticiasMotoristaPage())
-              );
-            },
-          ),
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NoticiasMotoristaPage()));
+              },
+            ),
             title: const Text('Nova Noticia'),
           ),
           body: Container(
@@ -72,7 +74,7 @@ class _AdicionarNoticiaPageState extends State<AdicionarNoticiaPage> {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (noticias.length >= 5 && titulo.length >= 5) {
                           if (data.month < 10) {
                             mes = "0" + data.month.toString();
@@ -83,6 +85,7 @@ class _AdicionarNoticiaPageState extends State<AdicionarNoticiaPage> {
                               "/" +
                               data.year.toString();
                           teste.adicionarNoticia(titulo, noticias, ajuda);
+                          //await teste.buscarNoticia();
                           Navigator.push(
                               context,
                               MaterialPageRoute(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/repositorios/noticia_repositorio.dart';
+import 'package:flutter_application_1/repositorios/instituicao_db.dart';
+import 'package:flutter_application_1/repositorios/noticia_db.dart';
 import 'package:flutter_application_1/telas/adicionar_noticia_page.dart';
 import 'package:flutter_application_1/telas/motorista_principal_page.dart';
 
@@ -13,8 +14,12 @@ class NoticiasMotoristaPage extends StatefulWidget {
 class _NoticiasMotoristaPageState extends State<NoticiasMotoristaPage> {
   @override
   Widget build(BuildContext context) {
-    final tabela = NoticiaRepository.tabela;
 
+    Instituicao_db facul = Instituicao_db();
+
+    var ajuda =0;
+    final tabela = Noticia_db.tabela;
+    
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -25,13 +30,14 @@ class _NoticiasMotoristaPageState extends State<NoticiasMotoristaPage> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back ),
-              onPressed: () {
-              Navigator.push(context,
-                MaterialPageRoute(builder: (context) => MotoristaMainPage())
-                );
-              }
-            ),
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () async {
+                  ajuda = await facul.quantidadeInstituicao();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MotoristaMainPage(quantidade: ajuda,)));
+                }),
             title: const Text('Noticias'),
             backgroundColor: Color(0xFF13818D),
           ),
@@ -64,6 +70,6 @@ class _NoticiasMotoristaPageState extends State<NoticiasMotoristaPage> {
                         builder: (context) => AdicionarNoticiaPage()));
               },
               label: Icon(Icons.add, color: Colors.white)),
-      ));
+        ));
   }
 }

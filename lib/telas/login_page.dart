@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/repositorios/instituicao_db.dart';
 import 'package:flutter_application_1/servicos/auth_servicos.dart';
 import 'package:flutter_application_1/telas/motorista_principal_page.dart';
 import 'package:flutter_application_1/telas/usuario_principal_page.dart';
@@ -18,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   final senha = TextEditingController();
   bool _isObscure = true;
   Usuario_db us = Usuario_db();
+
+  Instituicao_db facul = Instituicao_db();
   var M;
 
   login() async {
@@ -31,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var ajuda = 0;
     return Container(
         padding: const EdgeInsets.only(left: 40, right: 40, bottom: 5),
         decoration: const BoxDecoration(
@@ -141,14 +145,21 @@ class _LoginPageState extends State<LoginPage> {
                           var a = await us.verificaUsuario(email.text);
                           email.clear;
                           senha.clear;
-                          if (a){
-                            //var U = await us.pegardadosUsuario(email.text);
-                            Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const MotoristaMainPage()));
-                          }else{
+                          if (a) { // ERRO EMAIL
+                            await facul.buscarInstituicao();
+                            ajuda = await facul.quantidadeInstituicao();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MotoristaMainPage(
+                                          quantidade: ajuda,
+                                        )));
+                          } else {
                             M = await us.pegardadosUsuario(email.text);
-                            Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => UsuarioMainPage(aluno: M)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => UsuarioMainPage(aluno: M)));
                           }
                         }
                       },

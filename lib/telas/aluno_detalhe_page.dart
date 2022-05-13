@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/classes/aluno_classe.dart';
 
 class AlunoDetalhePage extends StatefulWidget {
-  //receber email aluno final.....
+
   Aluno alunos;
 
   AlunoDetalhePage({ Key? key, required this.alunos}) : super(key: key);
@@ -13,8 +13,6 @@ class AlunoDetalhePage extends StatefulWidget {
 
 class _AlunoDetalhePageState extends State<AlunoDetalhePage>{
   
-  // final Aluno _aluno = AlunoRepository.select(email);
-
   @override
   Widget build(BuildContext context){
 
