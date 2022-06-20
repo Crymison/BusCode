@@ -20,6 +20,7 @@ class Noticia_db {
   }
 
   buscarNoticia() async {
+    tabela = [];
     var colecao = FirebaseFirestore.instance.collection('Noticias');
     var todasNoticias = await colecao.get();
   

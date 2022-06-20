@@ -55,18 +55,18 @@ class _UsuarioMainPageState extends State<UsuarioMainPage> {
           body: Column(
             children: [
               Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          child: Image.asset(
-                            widget.aluno.icone.toString(),
-                            width: 150,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(150)),
-                        ),
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      child: Image.asset(
+                        widget.aluno.icone.toString(),
+                        width: 150,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(150)),
+                    ),
                       ])),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
