@@ -4,8 +4,8 @@ import 'package:flutter_application_1/repositorios/noticia_db.dart';
 import 'package:flutter_application_1/telas/adicionar_noticia_page.dart';
 import 'package:flutter_application_1/telas/motorista_principal_page.dart';
 
-class NoticiasMotoristaPage extends StatefulWidget {
-  const NoticiasMotoristaPage({Key? key}) : super(key: key);
+class NoticiasMotoristaPage extends StatefulWidget with ChangeNotifier{
+  NoticiasMotoristaPage({Key? key}) : super(key: key);
 
   @override
   State<NoticiasMotoristaPage> createState() => _NoticiasMotoristaPageState();

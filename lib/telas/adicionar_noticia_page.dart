@@ -89,8 +89,8 @@ class _AdicionarNoticiaPageState extends State<AdicionarNoticiaPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const NoticiasMotoristaPage()));
+                                builder: (context) =>
+                                  NoticiasMotoristaPage()));
                         }
                       },
                       child: const Text('Adicionar',

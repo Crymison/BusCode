@@ -32,7 +32,7 @@ class _NoticiasUsuarioPageState extends State<NoticiasUsuarioPage> {
                     color: Colors.white,
                     child: ListTile(
                       leading: Text(tabela[Noticia].titulo_noticia,
-                          style: TextStyle(
+                        style: const TextStyle(
                               color: Colors.red,
                               fontWeight: FontWeight.bold,
                               fontSize: 18)),

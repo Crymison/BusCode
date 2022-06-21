@@ -75,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: const TextStyle(fontSize: 20, color: Colors.white),
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
                       labelText: 'E-mail',
                       labelStyle: TextStyle(color: Colors.white),
                       prefixIcon: Icon(Icons.email, color: Colors.white),

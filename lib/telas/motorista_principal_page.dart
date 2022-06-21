@@ -6,8 +6,8 @@ import 'package:flutter_application_1/repositorios/instituicao_repositiro.dart';
 import 'package:flutter_application_1/repositorios/noticia_db.dart';
 import 'package:flutter_application_1/repositorios/usuario_db.dart';
 import 'package:flutter_application_1/telas/instituicao_detalhe_page.dart';
-import 'package:flutter_application_1/telas/ler_qrcode_page.dart';
 import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../classes/globals.dart' as globals;
 
 class MotoristaMainPage extends StatefulWidget {
@@ -29,8 +29,7 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
     Instituicao_db faculdadeMetodo = Instituicao_db();
 
     final faculdade = Instituicao_db.faculdades;
-    final tabelaInstituicao = InstituicaoRepository.tabela;
-    
+    final tabelaInstituicao = InstituicaoRepository.tabela;    
     
     mostrarInstituicao(Instituicao instituicao) async {
       if(globals.contadorAlunoFaculdade){
@@ -44,6 +43,16 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
           ));
     }
 
+    readQRCode() async{
+      String code = await FlutterBarcodeScanner.scanBarcode(//interessante fazer try catch
+        "#ffffff",
+        "Cancelar",
+        true,
+        ScanMode.QR,
+      );
+      setState(() =>  code != '-1' ? code : 'Não valido');
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -52,10 +61,7 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.qr_code_scanner),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LeitorQRCodePage()));
-            },
+            onPressed: readQRCode,
           ),
           IconButton(
             icon: const Icon(Icons.notifications_active),
@@ -65,9 +71,9 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
                 globals.contadorMotorista = false;
               }
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => NoticiasMotoristaPage()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NoticiasMotoristaPage()));
             },
           ),
         ],
