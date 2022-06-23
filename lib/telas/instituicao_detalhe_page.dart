@@ -7,7 +7,6 @@ import 'package:flutter_application_1/telas/aluno_detalhe_page.dart';
 import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-
 class InstituicaoDetalhes extends StatefulWidget {
   Instituicao instituicao;
   InstituicaoDetalhes({Key? key, required this.instituicao}) : super(key: key);
@@ -27,6 +26,7 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
             builder: (_) => AlunoDetalhePage(alunos: alunos),
           ));
     }
+
     Usuario_db alu = Usuario_db();
     readQRCode() async {
       String code = await FlutterBarcodeScanner.scanBarcode(
@@ -39,7 +39,6 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
       setState(() => code != '-1' ? code : 'Não valido');
       alu.adicionarAlunosDia(code);
     }
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -54,11 +53,9 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
             icon: const Icon(Icons.notifications_active),
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NoticiasMotoristaPage()
-                )
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NoticiasMotoristaPage()));
             },
           )
         ],
@@ -67,8 +64,10 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
         itemBuilder: (BuildContext context, int aluno) {
           return ListTile(
             leading: Image.asset(tabelaAluno[aluno].icone),
-            title: Text(tabelaAluno[aluno].nome_aluno, style: TextStyle(fontSize: 16, color: Colors.black)),
-            subtitle: Text(tabelaAluno[aluno].telefone_aluno, style: TextStyle(fontSize: 14, color: Colors.black)),
+            title: Text(tabelaAluno[aluno].nome_aluno,
+                style: TextStyle(fontSize: 16, color: Colors.black)),
+            subtitle: Text(tabelaAluno[aluno].telefone_aluno,
+                style: TextStyle(fontSize: 14, color: Colors.black)),
             selected: false,
             selectedTileColor: Colors.indigo,
             onTap: () => mostrarAlunos(tabelaAluno[aluno]),

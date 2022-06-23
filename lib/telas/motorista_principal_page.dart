@@ -7,6 +7,7 @@ import 'package:flutter_application_1/repositorios/noticia_db.dart';
 import 'package:flutter_application_1/repositorios/usuario_db.dart';
 import 'package:flutter_application_1/telas/instituicao_detalhe_page.dart';
 import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
+import 'package:flutter_application_1/telas/tempo.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../classes/globals.dart' as globals;
 
@@ -37,6 +38,7 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
       if (globals.contadorAlunoFaculdade) {
         await alu.pegardadosAlunos(instituicao.nome.toString());
         globals.contadorAlunoFaculdade = false;
+        print(instituicao.nome);
       }
       Navigator.push(
           context,
@@ -57,6 +59,10 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
       alu.adicionarAlunosDia(code);
     }
 
+    tempo() {
+      //avigator.push(context, MaterialPageRoute(builder: (_) => tempo()));
+    }
+
     aux(Instituicao instituicao) {
       if (instituicao.nome == 'Universidade Tecnológica Federal do Paraná') {
         return widget.quantidade;
@@ -75,6 +81,13 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
           IconButton(
             icon: const Icon(Icons.qr_code_scanner),
             onPressed: readQRCode,
+          ),
+          IconButton(
+            icon: const Icon(Icons.wb_sunny),
+            onPressed: () async {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TempoPage()));
+            },
           ),
           IconButton(
             icon: const Icon(Icons.notifications_active),
