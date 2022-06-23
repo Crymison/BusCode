@@ -4,8 +4,8 @@ import 'package:flutter_application_1/classes/instituicao_classe.dart';
 import 'package:flutter_application_1/repositorios/aluno_repositorio.dart';
 import 'package:flutter_application_1/repositorios/usuario_db.dart';
 import 'package:flutter_application_1/telas/aluno_detalhe_page.dart';
-import 'package:flutter_application_1/telas/ler_qrcode_page.dart';
 import 'package:flutter_application_1/telas/noticias_motorista_page.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 
 class InstituicaoDetalhes extends StatefulWidget {
@@ -27,6 +27,20 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
             builder: (_) => AlunoDetalhePage(alunos: alunos),
           ));
     }
+    Usuario_db alu = Usuario_db();
+    readQRCode() async {
+      String code = await FlutterBarcodeScanner.scanBarcode(
+        //interessante fazer try catch
+        "#ffffff",
+        "Cancelar",
+        true,
+        ScanMode.QR,
+      );
+      setState(() => code != '-1' ? code : 'Não valido');
+      alu.adicionarAlunosDia(code);
+    }
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -34,14 +48,7 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
         actions: [
           IconButton(
             icon: const Icon(Icons.qr_code_scanner),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LeitorQRCodePage()
-                )
-              );
-            },
+            onPressed: readQRCode,
           ),
           IconButton(
             icon: const Icon(Icons.notifications_active),

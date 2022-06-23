@@ -35,8 +35,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var ajuda = 0;
+    var ajuda2 = 0;
     return Container(
-        padding: const EdgeInsets.only(left: 40, right: 40, bottom: 5),
+        padding: const EdgeInsets.only(left: 40, right: 40, top: 10),
         decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -142,30 +143,36 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           login();
                           var a = await us.verificaUsuario(email.text);
-                          if (a == null){
+                          if (a == null) {
                             email.clear;
                             senha.clear;
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('E-mail não registrado!, Tente novamente!')));
-                          }else{
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    'E-mail não registrado!, Tente novamente!')));
+                          } else {
                             email.clear;
                             senha.clear;
+
                             if (a) {
                               await facul.buscarInstituicao();
-                              ajuda = await facul.quantidadeInstituicao();
+                              ajuda = await facul.utfpr();
+                              ajuda2 = await facul.uenp();
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => MotoristaMainPage(
                                             quantidade: ajuda,
+                                            quantidade2: ajuda2,
                                           )));
                             } else {
                               M = await us.pegardadosUsuario(email.text);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => UsuarioMainPage(aluno: M)));
+                                      builder: (_) =>
+                                          UsuarioMainPage(aluno: M)));
                             }
-                          } 
+                          }
                         }
                       },
                       child: Row(

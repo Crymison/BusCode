@@ -13,25 +13,52 @@ class Instituicao_db {
 
     for (var doc in todasInstituicao.docs) {
       Instituicao instituicao = Instituicao(
-        id: doc['id'],
-        nome: doc['nome'],
-        icone: doc['icone'],
-        endereco: doc['endereco'],
-        sigla: doc['sigla'],
-        telefone: doc['telefone']
-      );
+          id: doc['id'],
+          nome: doc['nome'],
+          icone: doc['icone'],
+          endereco: doc['endereco'],
+          sigla: doc['sigla'],
+          telefone: doc['telefone']);
       faculdades.add(instituicao);
     }
   }
 
   quantidadeInstituicao() async {
-
-    var colecao = FirebaseFirestore.instance.collection('Usuarios');
+    var colecao = FirebaseFirestore.instance.collection('UsuariosDiarios');
     var todasInstituicao = await colecao.get();
     var quantidade = 0;
 
     for (var doc in todasInstituicao.docs) {
-      if (doc['tipoid'] == 1 && doc['instituicao'].toString() == 'Universidade Tecnológica Federal do Paraná'){
+      if (doc['instituicao'].toString() ==
+          'Universidade Tecnológica Federal do Paraná') {
+        quantidade++;
+      }
+    }
+    return quantidade;
+  }
+
+  utfpr() async {
+    var colecao = FirebaseFirestore.instance.collection('UsuariosDiarios');
+    var todasInstituicao = await colecao.get();
+    var quantidade = 0;
+
+    for (var doc in todasInstituicao.docs) {
+      if (doc['instituicao'].toString() ==
+          'Universidade Tecnológica Federal do Paraná') {
+        quantidade++;
+      }
+    }
+    return quantidade;
+  }
+
+  uenp() async {
+    var colecao = FirebaseFirestore.instance.collection('UsuariosDiarios');
+    var todasInstituicao = await colecao.get();
+    var quantidade = 0;
+
+    for (var doc in todasInstituicao.docs) {
+      if (doc['instituicao'].toString() ==
+          'Universidade Estadual do Norte do Paraná') {
         quantidade++;
       }
     }

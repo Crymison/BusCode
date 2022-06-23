@@ -12,8 +12,11 @@ import '../classes/globals.dart' as globals;
 
 class MotoristaMainPage extends StatefulWidget {
   var quantidade;
-  MotoristaMainPage({Key? key, required this.quantidade}) : super(key: key);
- 
+  var quantidade2;
+  MotoristaMainPage(
+      {Key? key, required this.quantidade, required this.quantidade2})
+      : super(key: key);
+
   @override
   State<MotoristaMainPage> createState() => _MotoristaMainPageState();
 }
@@ -23,16 +26,15 @@ var aux = 0;
 class _MotoristaMainPageState extends State<MotoristaMainPage> {
   @override
   Widget build(BuildContext context) {
-
     Noticia_db teste = Noticia_db();
     Usuario_db alu = Usuario_db();
     Instituicao_db faculdadeMetodo = Instituicao_db();
 
     final faculdade = Instituicao_db.faculdades;
-    final tabelaInstituicao = InstituicaoRepository.tabela;    
-    
+    final tabelaInstituicao = InstituicaoRepository.tabela;
+
     mostrarInstituicao(Instituicao instituicao) async {
-      if(globals.contadorAlunoFaculdade){
+      if (globals.contadorAlunoFaculdade) {
         await alu.pegardadosAlunos(instituicao.nome.toString());
         globals.contadorAlunoFaculdade = false;
       }
@@ -43,14 +45,25 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
           ));
     }
 
-    readQRCode() async{
-      String code = await FlutterBarcodeScanner.scanBarcode(//interessante fazer try catch
+    readQRCode() async {
+      String code = await FlutterBarcodeScanner.scanBarcode(
+        //interessante fazer try catch
         "#ffffff",
         "Cancelar",
         true,
         ScanMode.QR,
       );
-      setState(() =>  code != '-1' ? code : 'Não valido');
+      setState(() => code != '-1' ? code : 'Não valido');
+      alu.adicionarAlunosDia(code);
+    }
+
+    aux(Instituicao instituicao) {
+      if (instituicao.nome == 'Universidade Tecnológica Federal do Paraná') {
+        return widget.quantidade;
+      } else if (instituicao.nome ==
+          'Universidade Estadual do Norte do Paraná') {
+        return widget.quantidade2;
+      }
     }
 
     return Scaffold(
@@ -71,9 +84,9 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
                 globals.contadorMotorista = false;
               }
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NoticiasMotoristaPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NoticiasMotoristaPage()));
             },
           ),
         ],
@@ -86,11 +99,11 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
               height: 50,
               width: 50,
             ),
-            title: Text(faculdade[instituicao].nome,
+            title: Text(faculdade[instituicao].nome, // Nome
                 style: TextStyle(fontSize: 16, color: Colors.black)),
-            subtitle: Text(faculdade[instituicao].telefone,
+            subtitle: Text(faculdade[instituicao].telefone, // Telefone
                 style: TextStyle(fontSize: 14, color: Colors.black)),
-            trailing: Text(widget.quantidade.toString(),
+            trailing: Text(aux(faculdade[instituicao]).toString(), // Quantidade
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             selected: false,
             selectedTileColor: Colors.indigo,

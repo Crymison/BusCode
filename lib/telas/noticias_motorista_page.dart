@@ -4,7 +4,7 @@ import 'package:flutter_application_1/repositorios/noticia_db.dart';
 import 'package:flutter_application_1/telas/adicionar_noticia_page.dart';
 import 'package:flutter_application_1/telas/motorista_principal_page.dart';
 
-class NoticiasMotoristaPage extends StatefulWidget with ChangeNotifier{
+class NoticiasMotoristaPage extends StatefulWidget with ChangeNotifier {
   NoticiasMotoristaPage({Key? key}) : super(key: key);
 
   @override
@@ -14,12 +14,12 @@ class NoticiasMotoristaPage extends StatefulWidget with ChangeNotifier{
 class _NoticiasMotoristaPageState extends State<NoticiasMotoristaPage> {
   @override
   Widget build(BuildContext context) {
-
     Instituicao_db facul = Instituicao_db();
 
-    var ajuda =0;
+    var ajuda = 0;
+    var ajuda2 = 0;
     final tabela = Noticia_db.tabela;
-    
+
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -32,11 +32,13 @@ class _NoticiasMotoristaPageState extends State<NoticiasMotoristaPage> {
             leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () async {
-                  ajuda = await facul.quantidadeInstituicao();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MotoristaMainPage(quantidade: ajuda,)));
+                          builder: (context) => MotoristaMainPage(
+                                quantidade: ajuda,
+                                quantidade2: ajuda2,
+                              )));
                 }),
             title: const Text('Noticias'),
             backgroundColor: Color(0xFF13818D),
