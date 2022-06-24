@@ -57,10 +57,14 @@ class _MotoristaMainPageState extends State<MotoristaMainPage> {
       );
       setState(() => code != '-1' ? code : 'Não valido');
       alu.adicionarAlunosDia(code);
-    }
 
-    tempo() {
-      //avigator.push(context, MaterialPageRoute(builder: (_) => tempo()));
+      if (globals.avisoaux == true) {
+        globals.avisoaux = false;
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Usuário já inserido!'),
+          duration: Duration(seconds: 3),
+        ));
+      }
     }
 
     aux(Instituicao instituicao) {

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/classes/alunoD_classe.dart';
 import 'package:flutter_application_1/classes/aluno_classe.dart';
 import 'package:flutter_application_1/classes/motorista_classe.dart';
+import '../classes/globals.dart' as globals;
 
 class Usuario_db {
   static List<Aluno> tabela = [];
@@ -217,7 +218,7 @@ class Usuario_db {
       }
 
       if (i == 1) {
-        print(" Usuário $nome já inserido ");
+        globals.avisoaux = true;
       } else {
         for (var i = 0; i < tabelas.length; i++) {
           if (tabelas[i].nome_aluno == nome) {
