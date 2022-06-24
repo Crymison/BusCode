@@ -87,4 +87,35 @@ RELATORIO 2:{
     -executar comando flutterfire configure;
     -executar flutter clean e depois flutter pub get;
     -executar flutter run ou via VScode;
+    }
+    
+    RELATORIO 3:{
+    Nome: Gabriel Del padre Paleta RA: 2052202
+    Nome: Marcus Vinicius Braz RA: 2052253
+
+    BusCode - 
+
+    O Aplicativo visa melhorar a parte de presença e comunição entre usuarios e seus respectivos meios de transportes como exemplo: vãns e onibus escolares.
+
+    Principais funcionalidades:
+    Gabriel/Marcus
+    - Leitor QR-CODE(Motorista) Gabriel/Marcus;
+    - Gerador QR-CODE unico(Aluno) Gabriel/Marcus;
+    - Api clima na tela principal(Motorista) Gabriel/Marcus;
+    - Atualização de carregamento de dados conectando ao banco de dados online firebase, com atualização do mesmo. Gabriel/Marcus;
+
+    Bugs:
+
+    - Sistema de changenotifier não funciona;
+
+    Funcionalidades Faltantes: 
+ 
+    - Changenotifier nas telas para fazer a atualização das mesmas quando ocorrer alguma mudança de dados ou troca de telas; 
+    - Resolver bugs;
+    
+    Instalação:
+    
+    -executar comando flutterfire configure;
+    -executar flutter clean e depois flutter pub get;
+    -executar flutter run ou via VScode;
 }
