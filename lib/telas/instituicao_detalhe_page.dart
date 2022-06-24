@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/classes/alunoD_classe.dart';
 import 'package:flutter_application_1/classes/aluno_classe.dart';
 import 'package:flutter_application_1/classes/instituicao_classe.dart';
 import 'package:flutter_application_1/repositorios/aluno_repositorio.dart';
@@ -19,7 +20,7 @@ class _InstituicaoDetalhesState extends State<InstituicaoDetalhes> {
   @override
   Widget build(BuildContext context) {
     final tabelaAluno = Usuario_db.tabela;
-    mostrarAlunos(Aluno alunos) {
+    mostrarAlunos(AlunoD alunos) {
       Navigator.push(
           context,
           MaterialPageRoute(

@@ -5,7 +5,8 @@ import 'package:flutter_application_1/classes/motorista_classe.dart';
 import '../classes/globals.dart' as globals;
 
 class Usuario_db {
-  static List<Aluno> tabela = [];
+  static List<AlunoD> tabela = [];
+  //static List<AlunoD> tabelas = [];
 
   //REPOSITORIO/BANCO AlUNOS
   nomesAlunos() async {
@@ -126,17 +127,18 @@ class Usuario_db {
   }
 
   pegardadosAlunos(insti) async {
-    var colecao = FirebaseFirestore.instance.collection('Usuarios');
+    var colecao = FirebaseFirestore.instance.collection('UsuariosDiarios');
     var pegardadosUsuario = await colecao.get();
     for (var doc in pegardadosUsuario.docs) {
-      if (doc['tipoid'] == 1 && doc['instituicao'].toString() == insti) {
-        Aluno aluno = Aluno(
+      if (doc['instituicao'].toString() == insti) {
+        AlunoD aluno = AlunoD(
             icone: doc['imagem'],
             nome_aluno: doc['nome'],
             email_aluno: doc['email'],
             rg_aluno: doc['rg'],
             telefone_aluno: doc['telefone'],
-            instituicao: doc['instituicao']);
+            instituicao: doc['instituicao'],
+            data: doc['data']);
         tabela.add(aluno);
       }
     }
